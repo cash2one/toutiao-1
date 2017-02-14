@@ -1,0 +1,16 @@
+{
+	"type_0":{
+		"type_id":0,
+		"package":"processor",
+		"module":"default_feed_processor",
+		"function":"process",
+		"name":"DEFAULT"
+	},
+	"type_1":{
+		"type_id":1,
+		"package":"processor",
+		"module":"other_feed_processor",
+		"function":"process",
+		"name":"OTHER"
+	}
+}

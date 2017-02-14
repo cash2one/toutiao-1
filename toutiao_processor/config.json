@@ -1,0 +1,19 @@
+{
+	"mq_address":"ampq://127.0.0.1:5672",
+	"user_view_history_queue":"user_view_history",
+	"user_view_queue":"user_view",
+	"article_info_redis":{"host":"127.0.0.1","port":6379,"db":1},
+    "hot_article_redis":{"host":"127.0.0.1","port":6379,"db":2},
+    "cold_start_redis":{"host":"127.0.0.1","port":6379,"db":3},
+	"similarity_redis":{"host":"127.0.0.1","port":6379,"db":4},
+	"user_info_redis":{"host":"127.0.0.1","port":6379,"db":5},
+	"user_request_dispatch_redis":{"host":"127.0.0.1","port":6379,"db":6},
+	"user_info_mongo":{"host":"127.0.0.1:27017"},
+	"similarity_mongo":{"host":"127.0.0.1:27017","db":"toutiao","table_for_calcu":"similarty_calcu","table":"similarity_score"},
+	"user_view_mongo":{"host":"127.0.0.1:27017","db":"toutiao","table":"user_view"},
+    "article_pair_max_cache_no":100000,
+    "similarity_thread_no":3,
+	"cold_start_max_no":10,
+	"hot_article_threshold":0.4,
+	"user_request_processor":{"dispatch_module_config_file":"config/module.json"}
+}

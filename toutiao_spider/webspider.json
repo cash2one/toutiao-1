@@ -1,0 +1,9 @@
+{
+	"finish_redis":{"host":"127.0.0.1","port":6379,"db":0},
+	"toutiao_mongo":{"host":"127.0.0.1:27017"},
+	"artical":{"db":"toutiao","table":"toutiao_artical"},
+	"image":{"db":"toutiao","table":"toutiao_image"},
+	"image_path":"E:/download_image",
+	"server_info":["tcp://127.0.0.1:11111","tcp://127.0.0.1:11112","tcp://127.0.0.1:11113","tcp://127.0.0.1:11114","tcp://127.0.0.1:11115","tcp://127.0.0.1:11116"],
+	"mq_address":"ampq://127.0.0.1:5672"
+}
