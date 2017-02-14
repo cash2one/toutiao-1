@@ -41,6 +41,7 @@ class toutiao_article_info(object):
         self.article_info_dict['GLOBAL'].update_article_read(article_id,usid,stage)
         if name != None:
             name = name.upper()
+        if name != None and name != 'GLOBAL':
             self.add_new_article_info(name)
             self.article_info_dict[name].update_article_read(article_id,usid)
     
@@ -51,6 +52,7 @@ class toutiao_article_info(object):
         self.article_info_dict['GLOBAL'].update_article_push(article_id,usid,stage)
         if name != None:
             name = name.upper()
+        if name != None and name != 'GLOBAL':
             self.add_new_article_info(name)
             self.article_info_dict[name].update_article_push(article_id,usid)
     
@@ -58,7 +60,7 @@ class toutiao_article_info(object):
         """
         点击率
         """
-        if name == None:
+        if name == None or name.upper() == 'GLOBAL':
             if stage == None:
                 return self.article_info_dict['GLOBAL'].read_ratio(article_id)
             else:
@@ -72,7 +74,7 @@ class toutiao_article_info(object):
         """
         点击率
         """
-        if name == None:
+        if name == None or name.upper() == 'GLOBAL':
             if stage == None:
                 return self.article_info_dict['GLOBAL'].push_num(article_id)
             else:

@@ -45,18 +45,18 @@ class toutiao_hot_article(object):
         更新文章分数
         """
         self.hot_article_dict['GLOBAL'].update_stage_score(article_id,stage)
-        if name != None:
+        if name != None and name != 'GLOBAL':
             name = name.upper()
             self.add_new_hot_article(name)
             self.hot_article_dict[name].update_score(article_id)
     
-    def remove_not_hot(self,stage,max_num=5000,name=None,):
+    def remove_not_hot(self,stage,max_num=5000,name=None):
         """
         把不那么热的帖子删掉
         """
         self.hot_article_dict['GLOBAL'].remove_not_hot(stage,max_num)
         
-        if name != None:
+        if name != None and name.upper() != 'GLOBAL':
             name = name.upper()
             self.add_new_hot_article(name)
             self.hot_article_dict[name].remove_not_hot(max_num)
@@ -65,7 +65,7 @@ class toutiao_hot_article(object):
         """
         获得hot articles
         """
-        if name == None:
+        if name == None or name == 'GLOBAL':
             if stage == None:
                 return self.hot_article_dict['GLOBAL'].get_hot_articles(out_num)
             else:

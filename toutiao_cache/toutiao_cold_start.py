@@ -29,14 +29,38 @@ class toutiao_cold_start(object):
         """
         name = name.upper()
         self.add_new_cold_start(name)
+        if name != 'GLOBAL':
+            stage = None
         self.cold_start_dict[name].add_to_cold_start_cache(article_id,stage)
     
+    def is_cold(self,article_id,name,stage=None):
+        """
+        判断是不是冷启动的文章
+        """
+        name = name.upper()
+        self.add_new_cold_start(name)
+        if name != 'GLOBAL':
+            stage = None
+        return self.cold_start_dict[name].is_cold(article_id,stage)
+    
+    def update_cold_start_item(self,article_id,name,stage=None):
+        """
+        更新到冷启动的缓存里面
+        """
+        name = name.upper()
+        self.add_new_cold_start(name)
+        if name != 'GLOBAL':
+            stage = None
+        self.cold_start_dict[name].update_cold_start_item(article_id,stage)
+        
     def update_cold_start(self,name,stage=None):
         """
         全部更新冷启动
         """
         name = name.upper()
         self.add_new_cold_start(name)
+        if name != 'GLOBAL':
+            stage = None
         self.cold_start_dict[name].update_cold_start(stage)
     
     def get_cold_start_articles(self,article_no,name,stage=None):
@@ -45,6 +69,8 @@ class toutiao_cold_start(object):
         """
         name = name.upper()
         self.add_new_cold_start(name)
+        if name != 'GLOBAL':
+            stage = None
         return self.cold_start_dict[name].get_cold_start_articles(article_no,stage)
        
 if __name__ == '__main__':
@@ -55,4 +81,4 @@ if __name__ == '__main__':
 
     cs = toutiao_cold_start(config)
    
-    print cs.get_cold_start_articles(2,'test_1')
+    print cs.get_cold_start_articles(2,'GLOBAL')

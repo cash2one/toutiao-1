@@ -78,15 +78,19 @@ class default_feed(object):
             column = 'GLOBAL'
         return self.toutiao_hot_article.get_hot_articles(article_no,stage,column)
     
-    def get_articles(self,usid,article_no,column=None,stage=None):
+    def get_articles(self,usid,article_no,column=None,stages=None):
         """
         获得文章
         column:栏目
         stage:对应的阶段
         """
+        
         similarity = self.get_similarity_articles(usid,article_no)
-        hot = self.get_hot_articles(article_no,column,stage)
-        cold = self.get_cold_start_articles(article_no,column,stage)
+        hot = []
+        cold = []
+        for stage in stages:
+            hot.extend(self.get_hot_articles(article_no,column,stage))
+            cold.extend(self.get_cold_start_articles(article_no,column,stage))
         
         #print 's',similarity
         #print 'h',hot

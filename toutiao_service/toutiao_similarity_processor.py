@@ -7,7 +7,10 @@ Created on Fri Feb 10 17:43:50 2017
 @description:这是头条相似文章的类
 """
 import Queue
-from similarity_cache import similarity_cache
+import sys
+sys.path.append('..')
+
+from toutiao_similar.similarity_cache import similarity_cache
 import threading
 
 class toutiao_similarity_processor(object):

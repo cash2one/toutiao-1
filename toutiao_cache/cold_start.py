@@ -63,6 +63,7 @@ class cold_start(object):
             stage = None
         #获得push次数，一般情况应该是0，但是不排除其他情况，所有还要从缓存里面读取一遍
         push_num = cold_start.TOUTIAO_ARTICEL_INFO.push_num(article_id,stage,self.name)
+        
         key = self.cold_start_prefix % (self.name,'NO' if stage == None else stage)
         self.cold_start_redis_conn.zadd(key,article_id,push_num)
         
@@ -75,7 +76,8 @@ class cold_start(object):
         key = self.cold_start_prefix % (self.name,'NO' if stage == None else stage)
         read_ratio = cold_start.TOUTIAO_ARTICEL_INFO.read_ratio(article_id,stage,self.name)
         push_num = cold_start.TOUTIAO_ARTICEL_INFO.push_num(article_id,stage,self.name)
-        
+        if article_id == '104':
+            print read_ratio,push_num,stage
         #冷启动达到次数，但是点击率不行，从冷启动表删除
         if push_num >= self.cold_start_max_no and read_ratio < self.hot_article_threshold:
             self.delete_from_cold_start_cache(article_id,stage)
@@ -89,6 +91,19 @@ class cold_start(object):
         
         #剩下的情况更新push次数
         self.cold_start_redis_conn.zadd(key,article_id,push_num)
+        
+    def is_cold(self,article_id,stage=None):
+        """
+        判断是不是冷启动的文章
+        """
+        if stage != None and self.name != 'GLOBAL':
+            stage = None
+        key = self.cold_start_prefix % (self.name,'NO' if stage == None else stage)
+        score = self.cold_start_redis_conn.zscore(key,article_id)
+        if score != None:
+            return True
+        else:
+            return False
         
     def update_cold_start(self,stage=None):
         """
